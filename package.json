@@ -1,0 +1,22 @@
+{
+  "name": "dumbstruckgold2017-18",
+  "version": "1.0.0",
+  "description": "Dumbstruck Gold project for SE 2018",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SienaCollegeSoftwareEngineering/DumbstruckGold2017-18.git"
+  },
+  "author": "Dumbstruck Gold",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SienaCollegeSoftwareEngineering/DumbstruckGold2017-18/issues"
+  },
+  "homepage": "https://github.com/SienaCollegeSoftwareEngineering/DumbstruckGold2017-18#readme",
+  "dependencies": {
+    "angular": "^1.6.9"
+  }
+}

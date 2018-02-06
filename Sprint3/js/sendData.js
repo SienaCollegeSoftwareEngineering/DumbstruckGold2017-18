@@ -3,14 +3,14 @@ angular.module('DumbstruckApp', [])
 
 function func($scope, $q) {
   $scope.sendPicture = function () {
-    var photo = document.getElementById('photo');
-      var canvas = document.createElement('canvas');
-      canvas.width = photo.width;
-      canvas.height = photo.height;
-      canvas.getContext('2d').drawImage(photo, 0, 0);
-	var url = photo.src;
-	//var base64Data = url.substr(url.indexOf(',') + 1);
-      $scope.imageUrl = canvas.toDataURL("image/jpeg", 1.0);
+    var photo = document.getElementById('pictureTaken');
+    var canvas = document.createElement('canvas');
+    canvas.width = photo.width;
+    canvas.height = photo.height;
+    canvas.getContext('2d').drawImage(photo, 0, 0);
+    var url = photo.src;
+    //var base64Data = url.substr(url.indexOf(',') + 1);
+    $scope.imageUrl = canvas.toDataURL("image/jpeg", 1.0);
     var base64Data = $scope.imageUrl.substr($scope.imageUrl.indexOf(',')+1);
     console.log(base64Data);
     $scope.analyzeImage(base64Data, $q);
@@ -56,7 +56,7 @@ function func($scope, $q) {
         "X-Api-Key": API_KEY
       }
     });
-    
+
     return promise.promise;
   };
 }

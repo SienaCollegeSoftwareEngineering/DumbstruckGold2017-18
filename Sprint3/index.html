@@ -1,18 +1,47 @@
+<!DOCTYPE html>
+<!--
+*  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
+*
+*  Use of this source code is governed by a BSD-style license
+*  that can be found in the LICENSE file in the root of the source
+*  tree.
+-->
+<html>
+  <head>
 
-<!doctype html>
+    <meta charset="utf-8">
+    <meta name="description" content="WebRTC code samples">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+    <meta itemprop="description" content="Client-side WebRTC code samples">
+    <meta itemprop="image" content="../../../images/webrtc-icon-192x192.png">
+    <meta itemprop="name" content="WebRTC code samples">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta id="theme-color" name="theme-color" content="#ffffff">
 
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Title</title>
-    
-</head>
-<body ng-app="DumbstruckApp" ng-controller="DumbstruckCtrl">	
-	<img id="photo" src="caveman.jpg" alt="">
-    <input type="button" value="Send Data" ng-click="sendPicture()">
-    
-    <script src="../node_modules/angular/angular.js"></script>
+    <base target="_blank">
+
+    <title>getUserMedia to canvas</title>
+
+    <link rel="icon" sizes="192x192" href="../../../images/webrtc-icon-192x192.png">
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../../css/main.css">
+
+  </head>
+
+  <body ng-app="DumbstruckApp" ng-controller="DumbstruckCtrl">
+
+    <div id="container">
+
+      <video autoplay></video>
+      <button id="takeSnapshotBtn">Take snapshot</button>
+      <canvas id="pictureTaken"></canvas>
+      <input type="button" value="Send Data" ng-click="sendPicture()">
+    </div>
+
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="js/main.js"></script>
+<script src="../node_modules/angular/angular.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="sendData.js"></script>
-</body>
+    <script src="js/sendData.js"></script>
+  </body>
 </html>
