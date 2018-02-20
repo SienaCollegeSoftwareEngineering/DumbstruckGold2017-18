@@ -1,48 +1,7 @@
-angular.module('DumbstruckApp', [])
-  .controller('DumbstruckCtrl', ['$scope', '$q', func]);
+angular.module('DumbstruckApp')
+  .controller('SendDataCtrl', ['$scope', '$q', func]);
 
 function func($scope, $q) {
-  var video = document.querySelector('video');
-  var canvas = window.canvas = document.getElementById('pictureTaken');
-  canvas.width = 480;
-  canvas.height = 360;
-  var start = false;
-  var button = document.querySelector('#takeSnapshotBtn');
-  var timer = 0;
-  button.onclick = function(){
-    start = !start;
-    if(start){
-      timer = setInterval(startVideo, 200);
-    }
-    else {
-      clearInterval(timer);
-    }
-  };
- 
-  $scope.startVideo = function(){
-    console.log("video");
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    canvas.getContext('2d').
-      drawImage(video, 0, 0, canvas.width, canvas.height);
-  }
-
-  var constraints = {
-    audio: false,
-    video: true
-  };
-
-  function handleSuccess(stream) {
-    window.stream = stream; // make stream available to browser console
-    video.srcObject = stream;
-  }
-
-  function handleError(error) {
-    console.log('navigator.getUserMedia error: ', error);
-  }
-
-  navigator.mediaDevices.getUserMedia(constraints).
-    then(handleSuccess).catch(handleError);
   $scope.sendPicture = function () {
     var photo = document.getElementById('pictureTaken');
     var canvas = document.createElement('canvas');
@@ -56,7 +15,7 @@ function func($scope, $q) {
     console.log(base64Data);
     $scope.analyzeImage(base64Data, $q);
   }
-}
+
 $scope.analyzeImage = function (base64Image, $q) {
   var API_SERVER = "https://test-api.dumbstruck.com/v1";
   var API_KEY = "Ob0b3ozGMr2LR8N0G98nt9m68X8ZTLR693I8yo1A";
