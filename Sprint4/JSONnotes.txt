@@ -1,0 +1,15 @@
+* = needs to be iterated through
+Gender:  
+    check exposures[*].predictions[0].observations[*].focus.name
+    then exposures[*].predictions[0].observations[*].strength
+    
+Age: exposures[*].predictions[1].observations[0].focus.name  (Gives age range "0-2", "3-7", "8-12", "13-19", "20-36", "37-65", "66+")
+
+Emotions:
+    check exposures[*].predictions[2].observations[*].focus.name
+    then exposures[*].predictions[2].observations[*].strength
+    
+Ethnicity:
+    check exposures[*].predictions[3].observations[*].focus.name
+    then exposures[*].predictions[3].observations[*].strength
+

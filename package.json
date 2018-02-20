@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/SienaCollegeSoftwareEngineering/DumbstruckGold2017-18#readme",
   "dependencies": {
-    "angular": "^1.6.9"
+    "angular": "^1.6.9",
+    "d3": "^4.13.0",
+    "d3pie": "^0.2.1"
   }
 }
