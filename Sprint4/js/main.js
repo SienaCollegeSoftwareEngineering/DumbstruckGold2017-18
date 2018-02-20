@@ -15,19 +15,22 @@ canvas.width = 480;
 canvas.height = 360;
 var start = false;
 var button = document.querySelector('#takeSnapshotBtn');
+var timer = 0;
 button.onclick = function(){
-    start = !start;
-    startVideo(start);
-};
-
-function startVideo(start){
-  while(start)
-  {
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      canvas.getContext('2d').
-      drawImage(video, 0, 0, canvas.width, canvas.height);
+  start = !start;
+  if(start){
+    timer = setInterval(startVideo, 200);
   }
+  else {
+    clearInterval(timer);
+  }
+};
+function startVideo(){
+  console.log("video");
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').
+    drawImage(video, 0, 0, canvas.width, canvas.height);
 };
 
 var constraints = {
@@ -45,4 +48,4 @@ function handleError(error) {
 }
 
 navigator.mediaDevices.getUserMedia(constraints).
-    then(handleSuccess).catch(handleError);
+  then(handleSuccess).catch(handleError);
