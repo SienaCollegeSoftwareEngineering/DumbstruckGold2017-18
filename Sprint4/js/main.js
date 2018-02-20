@@ -13,13 +13,21 @@ var video = document.querySelector('video');
 var canvas = window.canvas = document.getElementById('pictureTaken');
 canvas.width = 480;
 canvas.height = 360;
-
+var start = false;
 var button = document.querySelector('#takeSnapshotBtn');
-button.onclick = function() {
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  canvas.getContext('2d').
-    drawImage(video, 0, 0, canvas.width, canvas.height);
+button.onclick = function(){
+    start = !start;
+    startVideo(start);
+};
+
+function startVideo(start){
+  while(start)
+  {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').
+      drawImage(video, 0, 0, canvas.width, canvas.height);
+  }
 };
 
 var constraints = {
