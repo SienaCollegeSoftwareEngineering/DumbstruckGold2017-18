@@ -29,7 +29,9 @@
         This is where emotion graph will go
     </div>
     <div class="container" id="demographics" style="border: 2px solid green; float: right; width: 35%">
-        This is where demographic info will go
+        <div id="genderPie"></div>
+        <div id="agePie"></div>
+        <div id="ethnicPie"></div>
     </div>
 
     <div id="container">
@@ -44,8 +46,96 @@
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="../node_modules/angular/angular.min.js"></script>
-    <script src="../node_modules/d3/build/d3.min.js"></script>
-    <script src="../node_modules/d3pie/d3pie/d3pie.min.js"></script>
-      <script src="js/main.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="d3pie.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+            var pie1 = new d3pie("genderPie", {
+    header: {
+        title:{
+            text: "Gender"
+        }
+    },
+	data: {
+        content:[
+        {
+            label: "Male",
+            value: 5
+        },
+            {
+            label: "Female",
+            value: 2
+        }
+        ]
+    }
+	});
+        var pie2 = new d3pie("agePie", {
+           header:{
+               title:{
+                   text: "Age"
+               }
+           },
+            data:{
+                content:[
+                    {
+                        label: "0-2",
+                        value: 1
+                    },
+                    {
+                        label: "3-7",
+                        value: 5
+                    },
+                    {
+                        label: "8-12",
+                        value: 8
+                    },
+                    {
+                        label: "13-19",
+                        value: 2
+                    },
+                    {
+                        label: "20-36",
+                        value: 7
+                    },
+                    {
+                        label: "37-65",
+                        value: 3
+                    },
+                    {
+                        label: "66+",
+                        value: 12
+                    }
+                ]
+            }
+        });
+        var pie3 = new d3pie("ethnicPie", {
+           header:{
+               title:{
+                   text: "Ethnicity"
+               }
+           },
+            data:{
+                content:[
+                    {
+                        label: "Caucasian",
+                        value: 1
+                    },
+                    {
+                        label: "Hispanic",
+                        value: 1
+                    },
+                    {
+                        label: "African",
+                        value: 1
+                    },
+                    {
+                        label: "Asian",
+                        value: 1
+                    }
+                    
+                ]
+            }
+        });
+        </script>
   </body>
 </html>
