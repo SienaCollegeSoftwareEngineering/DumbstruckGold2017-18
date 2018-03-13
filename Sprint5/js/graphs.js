@@ -1,23 +1,45 @@
-var pie1 = new d3pie("genderPie", {
-    header: {
-        title:{
-            text: "Gender"
-        }
-    },
-	data: {
-        content:[
-        {
-            label: "Male",
-            value: gender.numMales
-        },
-            {
-            label: "Female",
-            value: gender.numFemales
-        }
-        ]
+var genderPie = null;
+var agePie = null;
+var ethnPie = null;
+function bakePies(){
+    if (genderPie != null){
+        genderPie.destroy();
+        genderPie = null;
     }
+    if (agePie != null){
+        agePie.destroy();
+        agePie = null;
+    }
+    if (ethnPie != null){
+        ethnPie.destroy();
+        ethnPie = null;
+    }
+    genderPie = new d3pie("genderPie", {
+        header: {
+            title:{
+                text: "Gender"
+            }
+        },
+        data: {
+            content:[
+            {
+                label: "Male",
+                value: gender.numMales
+            },
+                {
+                label: "Female",
+                value: gender.numFemales
+            }
+            ]
+        },
+        effects: {
+                load:{
+                    effect:"none" //removes loading animation
+                }
+            }
 	});
-        var pie2 = new d3pie("agePie", {
+    
+    agePie = new d3pie("agePie", {
            header:{
                title:{
                    text: "Age"
@@ -54,9 +76,15 @@ var pie1 = new d3pie("genderPie", {
                         value: ages.age66
                     }
                 ]
+            },
+            effects: {
+                load:{
+                    effect:"none" //removes loading animation
+                }
             }
         });
-        var pie3 = new d3pie("ethnicPie", {
+    
+     ethnPie = new d3pie("ethnicPie", {
            header:{
                title:{
                    text: "Ethnicity"
@@ -82,5 +110,14 @@ var pie1 = new d3pie("genderPie", {
                     }
                     
                 ]
+            },
+         effects: {
+                load:{
+                    effect:"none" //removes loading animation
+                }
             }
         });
+}
+
+    
+        

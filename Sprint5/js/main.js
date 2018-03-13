@@ -92,12 +92,12 @@ $scope.analyzeImage = function (base64Image, $q) {
   }
 
   var params = {
-    "attention": true,
+    "attention": false,
     "emotions": true,
     "age": true,
     "gender": true,
     "ethnicity": true,
-    "landmarks": true
+    "landmarks": false
   }
 
   $.ajax({
@@ -109,7 +109,7 @@ $scope.analyzeImage = function (base64Image, $q) {
       console.log('Success');
       readJSON(data);
       console.log("data",data);
-      console.log("promise",promise);
+      //console.log("promise",promise);
       
     },
     error: function (data) {
@@ -128,7 +128,8 @@ $scope.analyzeImage = function (base64Image, $q) {
 };
 
 function readJSON(data){
-    var numPeople = data.length;
+    var numPeople = data.exposures.length;
+    console.log(numPeople);
     var genderNew = {
         numMales : 0,
         numFemales : 0
@@ -143,10 +144,10 @@ function readJSON(data){
         age66 : 0
     };
     var ethnicitiesNew = {
-    numCauc : 0,
-    numHisp : 0,
-    numAfrc : 0,
-    numAsia : 0
+        numCauc : 0,
+        numHisp : 0,
+        numAfrc : 0,
+        numAsia : 0
     };
     for (var i = 0; i < numPeople; i++){
         if (data.exposures[i].predictions[0].observations[0].focus.name =="Male"){
@@ -170,7 +171,7 @@ function readJSON(data){
         }else if(ageGuess == "66+"){
             agesNew.age66++;
         }
-        ethnGuess = data.exposures[i].predictions[3].observatopms[1].focus.name;
+        ethnGuess = data.exposures[i].predictions[3].observations[1].focus.name;
         if(ethnGuess == "Caucasian"){
             ethnicitiesNew.numCauc++;
         }else if(ethnGuess == "Hispanic"){
@@ -181,7 +182,13 @@ function readJSON(data){
             ethnicitiesNew.numAsia++;
         }
     }
-    for(var j = 0; j<genderNew.length;j++){
+    gender = genderNew;
+    ages = agesNew;
+    ethnicities = ethnicitiesNew;
+    
+    bakePies();
+
+    /*for(var j = 0; j<genderNew.length;j++){
         if(gender[j] != genderNew[j]){
             gender = genderNew;
             pie1.redraw();
@@ -202,6 +209,7 @@ function readJSON(data){
             break;
         }
     }
+    */
 
 };    
     
