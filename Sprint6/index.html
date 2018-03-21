@@ -25,20 +25,29 @@
     <div id="topheader" width="100%" style="background-color: black">
         <img src="dumbstrucklogo.jpg" height="50px" width="50px">
     </div>
-    <div class="container" id="emotiongraph">
+      <div layout="row" class="row">
+       <div id="container" style="float: left" flex="20" layout="column">
+           <div>
+            <p ng-show="start"><img src="live.png" height="20px"> {{numPeople}} viewers</p>
+            <p ng-show="!start" height="20px"></p> <!-- placeholder -->
+            </div>
+          <video autoplay width="50%"></video>
+          <button id="takeSnapshotBtn">Start Recording</button>
+          <canvas id="pictureTaken" style = "display:none"></canvas>
+        </div>
+    
+        <div class="container row" id="demographics" flex="50" layout="column" style="border: 1px solid red;">
+            <div id="genderPie" class="col-lg-4"></div>
+            <div id="agePie"  class="col-lg-4"></div>
+            <div id="ethnicPie" class="col-lg-4"></div>
+        </div>
+      
+      </div>
         
-    </div>
-    <div class="container" id="demographics">
-        <div id="genderPie"></div>
-        <div id="agePie"></div>
-        <div id="ethnicPie"></div>
-    </div>
 
-    <div id="container">
-      <video autoplay></video>
-      <button id="takeSnapshotBtn">Start Recording</button>
-      <canvas id="pictureTaken" style = "display : none"></canvas>
-    </div>
+    <div class="container" id="emotiongraph">    </div>
+
+ 
 
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

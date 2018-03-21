@@ -23,18 +23,20 @@ angular.module('DumbstruckApp', [])
     };
 
 function func($scope, $q){
+$scope.numPeople = 0;
     
 // Put variables in global scope to make them available to the browser console.
 var video = document.querySelector('video');
 var canvas = window.canvas = document.getElementById('pictureTaken');
 canvas.width = 480;
 canvas.height = 360;
-var start = false;
+$scope.start = false;
 var button = document.querySelector('#takeSnapshotBtn');
 var timer = 0;
 button.onclick = function(){
-  start = !start;
-  if(start){
+  $scope.start = !$scope.start;
+    $scope.$apply();
+  if($scope.start){
     timer = setInterval(startVideo, 3000);
       button.innerHTML = "Stop Recording";
   }
@@ -50,10 +52,7 @@ function startVideo(){
   canvas.getContext('2d').
     drawImage(video, 0, 0, canvas.width, canvas.height);
     $scope.sendPicture();
-};
-
-    
-    
+};    
     
 var constraints = {
   audio: false,
@@ -70,7 +69,7 @@ function handleError(error) {
 }
     
     $scope.sendPicture = function () {
-        console.log('sending picture');
+       // console.log('sending picture');
     var photo = document.getElementById('pictureTaken');
     var canvas = document.createElement('canvas');
     canvas.width = photo.width;
@@ -109,9 +108,8 @@ $scope.analyzeImage = function (base64Image, $q) {
     success: function (data) {
       promise.resolve(data);
       console.log('Success');
-      readJSON(data);
+      $scope.readJSON(data);
       console.log("data",data);
-      //console.log("promise",promise);
       
     },
     error: function (data) {
@@ -129,9 +127,9 @@ $scope.analyzeImage = function (base64Image, $q) {
   return promise.promise;
 };
 
-function readJSON(data){
-    var numPeople = data.exposures.length;
-    console.log(numPeople);
+$scope.readJSON = function(data){
+    $scope.numPeople = data.exposures.length;
+    $scope.$apply();
     var genderNew = {
         numMales : 0,
         numFemales : 0
@@ -151,7 +149,7 @@ function readJSON(data){
         numAfrc : 0,
         numAsia : 0
     };
-    for (var i = 0; i < numPeople; i++){
+    for (var i = 0; i < $scope.numPeople; i++){
         if (data.exposures[i].predictions[0].observations[0].focus.name =="Male"){
             genderNew.numMales++;
         }else{
@@ -189,30 +187,6 @@ function readJSON(data){
     ethnicities = ethnicitiesNew;
     
     bakePies();
-
-    /*for(var j = 0; j<genderNew.length;j++){
-        if(gender[j] != genderNew[j]){
-            gender = genderNew;
-            pie1.redraw();
-            break;
-        }
-    }
-    for(var j = 0; j<agesNew.length; j++){
-        if(agesNew[j] != ages[j]){
-            ages = agesNew;
-            pie2.redraw();
-            break;
-        }
-    }
-    for(var j = 0; j<ethnicitiesNew.length; j++){
-        if(ethnicitiesNew[j] != ethnicities[j]){
-            ethnicities = ethnicitiesNew;
-            pie3.redraw;
-            break;
-        }
-    }
-    */
-
 };    
     
 navigator.mediaDevices.getUserMedia(constraints).

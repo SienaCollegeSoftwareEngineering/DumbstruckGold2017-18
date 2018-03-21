@@ -20,6 +20,10 @@ function bakePies(){
                 text: "Gender"
             }
         },
+        size: {
+            canvasHeight: 200,
+            canvasWidth: 200
+        },
         data: {
             content:[
             {
@@ -52,6 +56,10 @@ function bakePies(){
                    text: "Age"
                }
            },
+        size: {
+            canvasHeight: 200,
+            canvasWidth: 200
+        },
             data:{
                 content:[
                     {
@@ -109,6 +117,10 @@ function bakePies(){
                    text: "Ethnicity"
                }
            },
+         size: {
+            canvasHeight: 200,
+            canvasWidth: 500
+        },
             data:{
                 content:[
                     {
