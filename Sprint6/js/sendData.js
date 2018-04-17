@@ -1,3 +1,4 @@
+//This file contains all of our angular code which sends the data from the webcam to fill the graph variables OLD NO LONGER USED AS OF 4/16/18
 angular.module('DumbstruckApp')
   .controller('SendDataCtrl', ['$scope', '$q', func]);
 
@@ -17,11 +18,12 @@ function func($scope, $q) {
   }
 
 $scope.analyzeImage = function (base64Image, $q) {
+//Here we supply our API server and API key that will be needed for our API call
   var API_SERVER = "https://test-api.dumbstruck.com/v1";
   var API_KEY = "Ob0b3ozGMr2LR8N0G98nt9m68X8ZTLR693I8yo1A";
 
   var promise = $q.defer();
-
+//We send the picture we want analyzed in the body of the API call
   var jsonBody = {
     "base64Image": base64Image
   }
@@ -34,7 +36,7 @@ $scope.analyzeImage = function (base64Image, $q) {
     "ethnicity": true,
     "landmarks": true
   }
-
+//Here is where we make our Post call to the API with our information and check to make sure what is returned is what we wanted
   $.ajax({
     type: "POST",
     url: API_SERVER + '/analyze/image?' + $.param(params),

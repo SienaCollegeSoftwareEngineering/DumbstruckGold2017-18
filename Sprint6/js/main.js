@@ -1,3 +1,4 @@
+//This is our main javascript file, it holds our angular code as well as makes API calls and fills our graph variables
 angular.module('DumbstruckApp', [])
     .controller('MainCtrl', ['$scope', '$q', func]);
 
@@ -22,6 +23,7 @@ angular.module('DumbstruckApp', [])
         numAsia : 1
     };
 
+//This is the function that sends a Post request with the data from the webcam and then checks to make sure we got back results and fills our graph variables 
 function func($scope, $q){
 $scope.numPeople = 0;
     
@@ -33,6 +35,8 @@ canvas.height = 360;
 $scope.start = false;
 var button = document.querySelector('#takeSnapshotBtn');
 var timer = 0;
+    
+//This is the code to start and stop recording when a user clicks the start/stop recording button
 button.onclick = function(){
   $scope.start = !$scope.start;
     $scope.$apply();
@@ -45,7 +49,8 @@ button.onclick = function(){
     button.innerHTML = "Start Recording"
   }
 };
-    
+
+//Our startVideo function which starts the webcam and displays the video on the dashboard
 function startVideo(){
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
@@ -58,12 +63,14 @@ var constraints = {
   audio: false,
   video: true
 };
-
+    
+//Handle a successful connection to the webcam
 function handleSuccess(stream) {
   window.stream = stream; // make stream available to browser console
   video.srcObject = stream;
 }
 
+//Catch any errors we get
 function handleError(error) {
   console.log('navigator.getUserMedia error: ', error);
 }
@@ -82,6 +89,7 @@ function handleError(error) {
     $scope.analyzeImage(base64Data, $q);
   }
 
+//Our analyzeImage function makes a Post request to the API with the picture we are sending to be analyzed as the body of the request
 $scope.analyzeImage = function (base64Image, $q) {
   var API_SERVER = "https://test-api.dumbstruck.com/v1";
   var API_KEY = "Ob0b3ozGMr2LR8N0G98nt9m68X8ZTLR693I8yo1A";
@@ -127,6 +135,7 @@ $scope.analyzeImage = function (base64Image, $q) {
   return promise.promise;
 };
 
+//This function reads our returned JSON from the Post request and changes our graph variables to the information gathered
 $scope.readJSON = function(data){
     $scope.numPeople = data.exposures.length;
     $scope.$apply();
@@ -149,6 +158,7 @@ $scope.readJSON = function(data){
         numAfrc : 0,
         numAsia : 0
     };
+    //Loop through our variables changing them to the correct value
     for (var i = 0; i < $scope.numPeople; i++){
         if (data.exposures[i].predictions[0].observations[0].focus.name =="Male"){
             genderNew.numMales++;
@@ -185,7 +195,7 @@ $scope.readJSON = function(data){
     gender = genderNew;
     ages = agesNew;
     ethnicities = ethnicitiesNew;
-    
+    //This method redraws the graphs we use in our HTML
     bakePies();
 };    
     

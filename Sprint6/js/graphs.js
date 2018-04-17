@@ -1,3 +1,4 @@
+//This file controlls our graphs using d3pie.min.js
 var genderPie = null;
 var agePie = null;
 var ethnPie = null;
