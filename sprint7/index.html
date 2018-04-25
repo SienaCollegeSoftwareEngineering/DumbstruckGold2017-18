@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta id="theme-color" name="theme-color" content="#ffffff">
+    <base target="_blank">
+    <title>Dumbstruck Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+
+  <body ng-app="DumbstruckApp" ng-controller="MainCtrl" style = "background-color: lightgrey">
+
+    <div id="topheader" width="100%" style="background-color: black">
+        <img src="dumbstrucklogo.jpg" height="50px" width="50px">
+    </div>
+      <div layout="row" class="row" style="margin-left: 10px">
+       <div id="container" style="float: left; width: 30%" layout="column">
+           <div>
+            <p ng-show="start" style="margin-left: 20px;"><img src="live.png" height="20px"> {{numPeople}} viewers</p>
+            <p ng-show="!start" height="20px"></p> <!-- placeholder -->
+            </div>
+          <video autoplay width="50%"></video>
+          <canvas id="pictureTaken" style = "display:none"></canvas>
+        </div>
+        
+        <div class="container row" id="demographics" layout="column" style="width: 60%;">
+            <div id="genderPie" class="col-md-4"></div>
+            <div id="agePie"  class="col-md-4"></div>
+            <div id="ethnicPie" class="col-md-4"></div>
+        </div>
+      
+      </div>
+    <button id="takeSnapshotBtn" style="margin-left: 10px">Start Recording</button>
+
+    <div class="container" id="emotiongraph">    </div>
+        <svg class="chart" width="1000" height="120" style="margin-left: 5px; margin-top: 20px;">
+            
+    <g transform="translate(65,0)">
+        <rect width="{{emotions.joy}}" height="19" style="fill:rgb(178,101,222)"></rect>
+    </g>
+    <g transform="translate(0,0)">
+        <text x="{{emotions.joy+66}}" y="9.5" dy=".35em">{{(emotions.joy-10)/7.5 | number:1}}%</text>
+    </g>
+    <g transform="translate(0,0)">
+        <text x="5" y="9.5" dy=".35em">Joy</text>
+    </g>
+            
+    <g transform="translate(65,20)">
+        <rect width="{{emotions.anger}}" height="19" style="fill:rgb(232,95,95)"></rect>
+    </g>
+    <g transform="translate(0,20)">
+        <text x="{{emotions.anger+66}}" y="9.5" dy=".35em">{{(emotions.anger-10)/7.5 | number:1}}%</text>
+    </g>
+    <g transform="translate(0,20)">
+        <text x="5" y="9.5" dy=".35em">Anger</text>
+    </g>
+        
+    <g transform="translate(65,40)">
+        <rect width="{{emotions.disgust}}" height="19" style="fill:rgb(102,211,88)"></rect>
+    </g>
+    <g transform="translate(0,40)">
+        <text x="{{emotions.disgust+66}}" y="9.5" dy=".35em">{{(emotions.disgust-10)/7.5 | number:1}}%</text>
+    </g>
+    <g transform="translate(0,40)">
+        <text x="5" y="9.5" dy=".35em">Disgust</text>
+    </g>
+        
+    <g transform="translate(65,60)">
+        <rect width="{{emotions.sadness}}" height="19" style="fill:rgb(82,109,226)"></rect>
+    </g>
+    <g transform="translate(0,60)">
+        <text x="{{emotions.sadness+66}}" y="9.5" dy=".35em">{{(emotions.sadness-10)/7.5 | number:1}}%</text>
+    </g>
+    <g transform="translate(0,60)">
+        <text x="5" y="9.5" dy=".35em">Sadness</text>
+    </g>
+        
+    <g transform="translate(65,80)">
+        <rect width="{{emotions.surprise}}" height="19" style="fill:rgb(80,187,222)"></rect>
+    </g>
+    <g transform="translate(0,80)">
+        <text x="{{emotions.surprise+66}}" y="9.5" dy=".35em">{{(emotions.surprise-10)/7.5 | number:1}}%</text>
+    </g>
+    <g transform="translate(0,80)">
+        <text x="5" y="9.5" dy=".35em">Surprise</text>
+    </g>
+        
+    <g transform="translate(65,100)">
+        <rect width="{{emotions.fear}}" height="19" style="fill:rgb(252,150,75)"></rect>
+    </g>
+    <g transform="translate(0,100)">
+        <text x="{{emotions.fear+66}}" y="9.5" dy=".35em">{{(emotions.fear-10)/7.5 | number:1}}%</text>
+    </g>
+    <g transform="translate(0,100)">
+        <text x="5" y="9.5" dy=".35em">Fear</text>
+    </g>
+        
+    </svg>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="d3pie.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src ="js/graphs.js"></script>
+  </body>
+</html>
