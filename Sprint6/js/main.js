@@ -26,7 +26,14 @@ angular.module('DumbstruckApp', [])
 //This is the function that sends a Post request with the data from the webcam and then checks to make sure we got back results and fills our graph variables 
 function func($scope, $q){
 $scope.numPeople = 0;
-    
+$scope.emotions = {
+        joy : 10,
+        anger : 10,
+        disgust : 10,
+        sadness : 10,
+        surprise : 10,
+        fear : 10
+    };
 // Put variables in global scope to make them available to the browser console.
 var video = document.querySelector('video');
 var canvas = window.canvas = document.getElementById('pictureTaken');
@@ -41,7 +48,7 @@ button.onclick = function(){
   $scope.start = !$scope.start;
     $scope.$apply();
   if($scope.start){
-    timer = setInterval(startVideo, 3000);
+    timer = setInterval(startVideo, 1000);
       button.innerHTML = "Stop Recording";
   }
   else {
@@ -158,6 +165,14 @@ $scope.readJSON = function(data){
         numAfrc : 0,
         numAsia : 0
     };
+    $scope.emotions = {
+        joy : 0,
+        anger : 0,
+        disgust : 0,
+        sadness : 0,
+        surprise : 0,
+        fear : 0
+    };
     //Loop through our variables changing them to the correct value
     for (var i = 0; i < $scope.numPeople; i++){
         if (data.exposures[i].predictions[0].observations[0].focus.name =="Male"){
@@ -191,7 +206,35 @@ $scope.readJSON = function(data){
         }else if(ethnGuess == "Asian"){
             ethnicitiesNew.numAsia++;
         }
+        for(var j = 0; j < 6; j++){
+            if(data.exposures[i].predictions[2].observations[j].focus.name == "Joy"){
+                $scope.emotions.joy += data.exposures[i].predictions[2].observations[j].strength;
+            }
+            if(data.exposures[i].predictions[2].observations[j].focus.name == "Anger"){
+                $scope.emotions.anger += data.exposures[i].predictions[2].observations[j].strength;
+            }
+            if(data.exposures[i].predictions[2].observations[j].focus.name == "Disgust"){
+                $scope.emotions.disgust += data.exposures[i].predictions[2].observations[j].strength;
+            }
+            if(data.exposures[i].predictions[2].observations[j].focus.name == "Sadness"){
+                $scope.emotions.sadness += data.exposures[i].predictions[2].observations[j].strength;
+            }
+            if(data.exposures[i].predictions[2].observations[j].focus.name == "Surprise"){
+                $scope.emotions.surprise += data.exposures[i].predictions[2].observations[j].strength;
+            }
+            if(data.exposures[i].predictions[2].observations[j].focus.name == "Fear"){
+                $scope.emotions.fear += data.exposures[i].predictions[2].observations[j].strength;
+            }
+        }
     }
+    $scope.$apply();
+    $scope.emotions.joy = ($scope.emotions.joy/$scope.numPeople)*750+10;
+    $scope.emotions.anger = ($scope.emotions.anger/$scope.numPeople)*750+10;
+    $scope.emotions.disgust = ($scope.emotions.disgust/$scope.numPeople)*750+10;
+    $scope.emotions.sadness = ($scope.emotions.sadness/$scope.numPeople)*750+10;
+    $scope.emotions.surprise = ($scope.emotions.surprise/$scope.numPeople)*750+10;
+    $scope.emotions.fear = ($scope.emotions.fear/$scope.numPeople)*750+10;
+    $scope.$apply();
     gender = genderNew;
     ages = agesNew;
     ethnicities = ethnicitiesNew;

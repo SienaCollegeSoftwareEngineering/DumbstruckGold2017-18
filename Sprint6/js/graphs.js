@@ -23,19 +23,19 @@ function bakePies(){
         },
         size: {
             canvasHeight: 200,
-            canvasWidth: 200
+            canvasWidth: 400
         },
         data: {
             content:[
             {
                 label: "Male",
                 value: gender.numMales,
-                        color: "#370E44"
+                        color: "#5184eb"
             },
                 {
                 label: "Female",
                 value: gender.numFemales,
-                        color: "#9146A7"
+                        color: "#f75f86"
             }
             ]
         },
@@ -59,7 +59,7 @@ function bakePies(){
            },
         size: {
             canvasHeight: 200,
-            canvasWidth: 200
+            canvasWidth: 400
         },
             data:{
                 content:[
@@ -120,29 +120,29 @@ function bakePies(){
            },
          size: {
             canvasHeight: 200,
-            canvasWidth: 500
+            canvasWidth: 400
         },
             data:{
                 content:[
                     {
                         label: "Caucasian",
                         value: ethnicities.numCauc,
-                        color: "#DAC1E1"
+                        color: "#e85f5f"
                     },
                     {
                         label: "Hispanic",
                         value: ethnicities.numHisp,
-                        color: "#A96FBA"
+                        color: "#b265de"
                     },
                     {
                         label: "African",
                         value: ethnicities.numAfrc,
-                        color: "#9146A7"
+                        color: "#50bbde"
                     },
                     {
                         label: "Asian",
                         value: ethnicities.numAsia,
-                        color: "#791E94"
+                        color: "#93d21a"
                     }
                     
                 ]
